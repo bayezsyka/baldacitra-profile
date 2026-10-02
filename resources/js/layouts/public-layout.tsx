@@ -8,7 +8,7 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
     return (
-        <div className="flex min-h-screen flex-col bg-white font-sans text-slate-800">
+        <div className="flex min-h-[100dvh] flex-col bg-white font-sans text-slate-800">
             <a href="#konten-utama" className="skip-link">
                 Lewati ke konten
             </a>

@@ -37,7 +37,7 @@ export default function Navbar() {
     return (
         <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
             <nav className="site-container" aria-label="Navigasi utama">
-                <div className="flex h-[76px] items-center justify-between gap-4">
+                <div className="flex h-[68px] items-center justify-between gap-3 sm:h-[76px] sm:gap-4">
                     <Link
                         href="/"
                         className="flex min-h-11 items-center"
@@ -46,7 +46,7 @@ export default function Navbar() {
                         <img
                             src="/images/balda_logo.png"
                             alt="Logo Balda Hajj & Umrah"
-                            className="h-12 w-auto object-contain"
+                            className="h-10 w-auto object-contain sm:h-12"
                             width="116"
                             height="80"
                         />

@@ -67,7 +67,7 @@ export default function Kontak() {
                     height="554"
                     fetchPriority="high"
                 />
-                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                <div className="site-container flex items-end py-10 sm:items-center sm:py-16">
                     <div>
                         <h1 className="page-hero-title">
                             Kontak dan Konsultasi
@@ -134,7 +134,7 @@ export default function Kontak() {
                                     </h3>
                                     <a
                                         href="tel:02172791208"
-                                        className="mt-1 block min-h-8 text-sm font-bold text-balda-blue hover:underline"
+                                        className="mt-1 inline-flex min-h-11 items-center text-sm font-bold text-balda-blue hover:underline"
                                     >
                                         021-7279 1208 / 1209
                                     </a>
@@ -142,7 +142,7 @@ export default function Kontak() {
                                         href="https://wa.me/6281288888996?text=Assalamualaikum%2C%20saya%20ingin%20berkonsultasi%20tentang%20program%20Balda."
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="block min-h-8 text-sm font-bold text-balda-blue hover:underline"
+                                        className="flex min-h-11 items-center text-sm font-bold text-balda-blue hover:underline"
                                     >
                                         08128 8888 996
                                     </a>
@@ -158,7 +158,7 @@ export default function Kontak() {
                                     </h3>
                                     <a
                                         href="mailto:info@baldacitra.com"
-                                        className="mt-1 inline-flex min-h-8 items-center text-sm font-bold text-balda-blue hover:underline"
+                                        className="mt-1 inline-flex min-h-11 items-center text-sm font-bold text-balda-blue hover:underline"
                                     >
                                         info@baldacitra.com
                                     </a>

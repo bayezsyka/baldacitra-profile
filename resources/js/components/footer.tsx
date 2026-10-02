@@ -59,7 +59,7 @@ export default function Footer() {
                                 <li key={href}>
                                     <Link
                                         href={href}
-                                        className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                        className="inline-flex min-h-11 items-center transition-colors hover:text-balda-gold"
                                     >
                                         {label}
                                     </Link>
@@ -92,7 +92,7 @@ export default function Footer() {
                                 />
                                 <a
                                     href="tel:02172791208"
-                                    className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                    className="inline-flex min-h-11 items-center transition-colors hover:text-balda-gold"
                                 >
                                     021-7279 1208 / 1209
                                 </a>
@@ -105,7 +105,7 @@ export default function Footer() {
                                 />
                                 <a
                                     href="mailto:info@baldacitra.com"
-                                    className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                    className="inline-flex min-h-11 items-center transition-colors hover:text-balda-gold"
                                 >
                                     info@baldacitra.com
                                 </a>

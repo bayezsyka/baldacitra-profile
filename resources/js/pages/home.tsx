@@ -69,7 +69,7 @@ export default function Home() {
                 />
             </Head>
 
-            <section className="relative isolate min-h-[39rem] overflow-hidden bg-balda-blue-deep text-white sm:min-h-[43rem]">
+            <section className="relative isolate flex min-h-[calc(100svh-4.25rem)] bg-balda-blue-deep text-white sm:min-h-[40rem]">
                 <img
                     src="/images/20260611_home_web_2.jpg"
                     alt="Jamaah Balda di Masjidil Haram"
@@ -79,12 +79,12 @@ export default function Home() {
                     fetchPriority="high"
                 />
                 <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,17,40,0.97)_0%,rgba(11,33,70,0.9)_44%,rgba(11,33,70,0.32)_100%)]" />
-                <div className="site-container flex min-h-[39rem] items-end py-16 sm:min-h-[43rem] sm:items-center sm:py-24">
+                <div className="site-container flex items-end py-12 sm:items-center sm:py-20 lg:py-24">
                     <div className="max-w-3xl">
                         <p className="mb-5 text-sm font-bold text-balda-gold">
                             PT. Balda Citra Mandiri
                         </p>
-                        <h1 className="max-w-3xl text-5xl leading-[0.98] font-black tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
+                        <h1 className="home-hero-title">
                             Perjalanan ibadah dengan pendampingan yang nyata.
                         </h1>
                         <p className="mt-6 max-w-xl text-base leading-7 text-balda-blue-sky sm:text-lg">
@@ -93,13 +93,16 @@ export default function Home() {
                             mendampingi jamaah sejak persiapan hingga kembali ke
                             tanah air.
                         </p>
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <Link href="/umrah" className="btn-gold sm:w-auto">
+                        <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row">
+                            <Link
+                                href="/umrah"
+                                className="btn-gold w-full sm:w-auto"
+                            >
                                 Lihat Jadwal Umrah
                             </Link>
                             <Link
                                 href="/kontak"
-                                className="btn-outline sm:w-auto"
+                                className="btn-outline w-full sm:w-auto"
                             >
                                 Konsultasi Perjalanan
                             </Link>
@@ -112,16 +115,18 @@ export default function Home() {
                 aria-label="Legalitas Balda"
                 className="border-b border-slate-200 bg-white"
             >
-                <div className="site-container grid divide-y divide-slate-200 md:grid-cols-4 md:divide-x md:divide-y-0">
+                <div className="site-container grid grid-cols-2 md:grid-cols-4">
                     {[
                         ['Sejak', '1996'],
                         ['Izin PIHK', '1214 / 2021'],
                         ['Izin PPIU', 'U.8 / 2022'],
                         ['Anggota HIMPUH', '039 / 2010'],
-                    ].map(([label, value]) => (
+                    ].map(([label, value], index) => (
                         <div
                             key={label}
-                            className="px-0 py-5 first:pl-0 last:pr-0 md:px-6 md:py-7"
+                            className={`border-slate-200 py-5 ${
+                                index % 2 === 0 ? 'border-r pr-4' : 'pl-4'
+                            } ${index < 2 ? 'border-b' : ''} md:border-r md:border-b-0 md:px-6 md:py-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0`}
                         >
                             <p className="text-xs font-bold text-slate-500">
                                 {label}
@@ -267,7 +272,7 @@ export default function Home() {
                             Lihat Profil Perusahaan
                         </Link>
                     </div>
-                    <figure className="relative min-h-[27rem] overflow-hidden rounded-2xl bg-balda-blue-deep shadow-[0_24px_60px_rgba(11,33,70,0.2)]">
+                    <figure className="relative min-h-[20rem] overflow-hidden rounded-2xl bg-balda-blue-deep shadow-[0_24px_60px_rgba(11,33,70,0.2)] sm:min-h-[27rem]">
                         <img
                             src="/images/DJI_20250425220346_0021_D-scaled.jpg"
                             alt="Tim dan jamaah Balda dalam kegiatan pembekalan"
@@ -322,11 +327,17 @@ export default function Home() {
                             pendaftaran.
                         </p>
                     </div>
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                        <a href="tel:02172791208" className="btn-outline">
+                    <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                        <a
+                            href="tel:02172791208"
+                            className="btn-outline w-full sm:w-auto"
+                        >
                             <Phone size={18} aria-hidden="true" /> 021-7279 1208
                         </a>
-                        <Link href="/kontak" className="btn-gold">
+                        <Link
+                            href="/kontak"
+                            className="btn-gold w-full sm:w-auto"
+                        >
                             Kirim Pertanyaan
                         </Link>
                     </div>

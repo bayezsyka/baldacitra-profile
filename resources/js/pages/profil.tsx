@@ -36,7 +36,7 @@ export default function Profil() {
                     height="554"
                     fetchPriority="high"
                 />
-                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                <div className="site-container flex items-end py-10 sm:items-center sm:py-16">
                     <div>
                         <h1 className="page-hero-title">
                             PT. Balda Citra Mandiri
@@ -111,7 +111,7 @@ export default function Profil() {
                             </div>
                         </div>
                     </div>
-                    <figure className="relative min-h-[28rem] overflow-hidden rounded-2xl bg-slate-100 shadow-[0_24px_60px_rgba(11,33,70,0.18)]">
+                    <figure className="relative min-h-[20rem] overflow-hidden rounded-2xl bg-slate-100 shadow-[0_24px_60px_rgba(11,33,70,0.18)] sm:min-h-[28rem]">
                         <img
                             src="/images/DJI_20250425220346_0021_D-scaled.jpg"
                             alt="Tim Balda dalam kegiatan persiapan jamaah"

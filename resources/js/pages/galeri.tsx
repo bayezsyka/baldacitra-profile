@@ -159,7 +159,7 @@ export default function Galeri() {
                     height="554"
                     fetchPriority="high"
                 />
-                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                <div className="site-container flex items-end py-10 sm:items-center sm:py-16">
                     <div>
                         <h1 className="page-hero-title">Galeri Perjalanan</h1>
                         <p className="page-hero-copy">

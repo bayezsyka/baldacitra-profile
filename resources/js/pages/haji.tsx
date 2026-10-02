@@ -57,7 +57,7 @@ export default function Haji() {
                     height="1802"
                     fetchPriority="high"
                 />
-                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                <div className="site-container flex items-end py-10 sm:items-center sm:py-16">
                     <div>
                         <h1 className="page-hero-title">Haji Khusus</h1>
                         <p className="page-hero-copy">
@@ -186,13 +186,16 @@ export default function Haji() {
                                 Balda.
                             </p>
                             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                                <a href="tel:02172791208" className="btn-gold">
+                                <a
+                                    href="tel:02172791208"
+                                    className="btn-gold w-full"
+                                >
                                     <Phone size={17} aria-hidden="true" />{' '}
                                     Telepon Balda
                                 </a>
                                 <Link
                                     href="/kontak?paket=Haji%20Khusus"
-                                    className="btn-outline"
+                                    className="btn-outline w-full"
                                 >
                                     Kirim Pertanyaan
                                 </Link>

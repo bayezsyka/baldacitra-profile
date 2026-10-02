@@ -193,7 +193,9 @@
     }
 
     .section-title {
-        @apply max-w-2xl text-3xl leading-[1.08] font-black tracking-[-0.03em] text-slate-950 md:text-5xl;
+        @apply max-w-2xl text-[clamp(1.875rem,8vw,3rem)] leading-[1.08] font-black tracking-[-0.03em] text-slate-950;
+        overflow-wrap: break-word;
+        text-wrap: balance;
     }
 
     .card {
@@ -201,11 +203,11 @@
     }
 
     .site-container {
-        @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+        @apply mx-auto w-full max-w-7xl min-w-0 px-5 sm:px-8 lg:px-10;
     }
 
     .page-hero {
-        @apply relative isolate min-h-[22rem] overflow-hidden bg-balda-blue-deep text-white;
+        @apply relative isolate flex min-h-[20rem] bg-balda-blue-deep text-white sm:min-h-[22rem];
     }
 
     .page-hero::after {
@@ -222,7 +224,9 @@
     }
 
     .page-hero-title {
-        @apply max-w-3xl text-4xl leading-[1.02] font-black tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl;
+        @apply max-w-3xl text-[clamp(2.25rem,10vw,3.75rem)] leading-[1.02] font-black tracking-[-0.04em] text-white;
+        overflow-wrap: break-word;
+        text-wrap: balance;
     }
 
     .page-hero-copy {
@@ -234,7 +238,14 @@
     }
 
     .form-control {
-        @apply min-h-12 w-full rounded-[10px] border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition-colors placeholder:text-slate-500 hover:border-slate-400 focus:border-balda-blue focus:ring-3 focus:ring-balda-blue/15 focus:outline-none;
+        @apply min-h-12 w-full min-w-0 rounded-[10px] border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition-colors placeholder:text-slate-500 hover:border-slate-400 focus:border-balda-blue focus:ring-3 focus:ring-balda-blue/15 focus:outline-none;
+    }
+
+    .home-hero-title {
+        @apply max-w-3xl leading-[1.02] font-black tracking-[-0.035em] text-white;
+        font-size: clamp(2.25rem, 10.8vw, 4.5rem);
+        overflow-wrap: break-word;
+        text-wrap: balance;
     }
 
     .skip-link {

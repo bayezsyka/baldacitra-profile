@@ -70,7 +70,7 @@ export default function Umrah() {
                     height="1920"
                     fetchPriority="high"
                 />
-                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                <div className="site-container flex items-end py-10 sm:items-center sm:py-16">
                     <div>
                         <h1 className="page-hero-title">Paket Umrah</h1>
                         <p className="page-hero-copy">
@@ -127,7 +127,7 @@ export default function Umrah() {
                                     <img
                                         src={paket.img}
                                         alt={`Poster ${paket.title}, keberangkatan ${paket.tanggal}`}
-                                        className="h-full max-h-[38rem] w-full object-contain"
+                                        className="mx-auto h-auto max-h-[32rem] w-full object-contain sm:max-h-[38rem] md:h-full"
                                         loading="lazy"
                                     />
                                 </div>
@@ -206,7 +206,7 @@ export default function Umrah() {
                                         </div>
                                         <Link
                                             href={paket.href}
-                                            className="btn-primary sm:min-w-48"
+                                            className="btn-primary w-full sm:w-auto sm:min-w-48"
                                         >
                                             Konsultasikan Paket
                                         </Link>
@@ -231,7 +231,7 @@ export default function Umrah() {
                     </div>
                     <a
                         href="tel:02172791208"
-                        className="btn-gold self-start lg:self-auto"
+                        className="btn-gold w-full sm:w-auto lg:self-auto"
                     >
                         <Phone size={18} aria-hidden="true" /> Hubungi 021-7279
                         1208
