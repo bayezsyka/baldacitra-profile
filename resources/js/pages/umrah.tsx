@@ -1,58 +1,51 @@
 import { Head, Link } from '@inertiajs/react';
-import { CalendarDays, Clock, ChevronRight, Phone, Star } from 'lucide-react';
+import { CalendarDays, Check, ChevronRight, Plane, Phone } from 'lucide-react';
 import PublicLayout from '@/layouts/public-layout';
 
 const paketList = [
     {
-        title: 'Umrah Plus 12 Hari',
-        tanggal: '15 Agustus 2026',
-        hari: 12,
-        img: '/images/Umrah_15Ags26.jpg',
-        badge: 'Tersedia',
+        title: 'Umrah Reguler 9 Hari',
+        tanggal: '24 Oktober 2026',
+        img: '/images/2026-10-24-scaled.jpg',
+        maskapai: 'Saudia Airlines',
+        harga: 'Mulai Rp40,5 juta',
+        status: 'Pendaftaran',
+        href: '/kontak?paket=Umrah%20Reguler%2024%20Oktober%202026',
         highlights: [
-            'Hotel bintang 5 dekat Masjidil Haram',
-            'Penerbangan langsung',
-            'Pembimbing ibadah berpengalaman',
-            'Ziarah Makkah & Madinah lengkap',
+            'Rute Madinah dan Jeddah',
+            'Haramain Express Madinah-Makkah',
+            'Worth Peninsula Hotel, Madinah',
+            'Jumeirah Hotel, Makkah',
         ],
     },
     {
-        title: 'Umrah Plus 12 Hari',
-        tanggal: '26 Februari 2026',
-        hari: 12,
-        img: '/images/20260226_umrah.jpg',
-        badge: 'Tersedia',
+        title: 'Umrah 12 Hari',
+        tanggal: '11-22 November 2026',
+        img: '/images/2026-11-21-Update3-scaled.jpg',
+        maskapai: 'Saudia Airlines',
+        harga: 'Mulai Rp48,5 juta',
+        status: 'Pendaftaran',
+        href: '/kontak?paket=Umrah%2012%20Hari%20November%202026',
         highlights: [
-            'Hotel bintang 5 dekat Masjidil Haram',
-            'Penerbangan langsung',
-            'Pembimbing ibadah berpengalaman',
-            'Ziarah Makkah & Madinah lengkap',
+            'Tiket pesawat internasional',
+            'Visa dan asuransi perjalanan',
+            'Akomodasi serta makan prasmanan tiga kali sehari',
+            'Koper dan perlengkapan Umrah',
         ],
     },
     {
-        title: 'Umrah Reguler',
-        tanggal: '17 Januari 2026',
-        hari: 12,
-        img: '/images/2026-01-scaled.jpg',
-        badge: 'Selesai',
+        title: 'Umrah Reguler 12 Hari',
+        tanggal: '24 Desember 2026',
+        img: '/images/2026-12-24-Tentatif-Koreksi-Kecil-scaled.jpg',
+        maskapai: 'Garuda Indonesia',
+        harga: 'Mulai USD 3.800',
+        status: 'Tentatif',
+        href: '/kontak?paket=Umrah%20Reguler%2024%20Desember%202026',
         highlights: [
-            'Hotel nyaman dekat Masjid',
-            'Akomodasi & makan full board',
-            'Pembimbing ibadah',
-            'Ziarah Makkah & Madinah',
-        ],
-    },
-    {
-        title: 'Umrah Ramadhan',
-        tanggal: 'Musim 2026',
-        hari: 15,
-        img: '/images/1-Keberangkatan-scaled.jpg',
-        badge: 'Pendaftaran Dibuka',
-        highlights: [
-            'Menyambut malam Lailatul Qadar',
-            'Akomodasi strategis',
-            'Bimbingan ibadah intensif',
-            'Suasana spiritual Ramadhan',
+            'Rute Jeddah dan Madinah',
+            'Haramain Express Makkah-Madinah',
+            'Makkah Hotel atau Rotana',
+            'Worth Peninsula atau Al Haram Hotel, Madinah',
         ],
     },
 ];
@@ -61,139 +54,190 @@ export default function Umrah() {
     return (
         <PublicLayout>
             <Head>
-                <title>Paket Umrah – Balda Haji & Umrah Indonesia</title>
+                <title>Paket Umrah | Balda Haji dan Umrah Indonesia</title>
                 <meta
                     name="description"
-                    content="Paket perjalanan ibadah Umrah dari PT. Balda Citra Mandiri. Terpercaya sejak 1996 dengan pelayanan terbaik."
+                    content="Jadwal dan pilihan paket Umrah PT. Balda Citra Mandiri dengan keberangkatan Oktober, November, dan Desember 2026."
                 />
             </Head>
 
-            <div className="pt-20">
-                {/* Hero */}
-                <div className="relative h-72 md:h-96 overflow-hidden">
-                    <img
-                        src="/images/IMG-20260530-WA0216-scaled.jpg"
-                        alt="Umrah Balda"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-balda-blue-deep/85" />
-                    <div
-                        className="relative h-full flex flex-col items-center justify-center text-white text-center px-4"
-                        data-aos="fade-up"
-                    >
-                        <p className="text-xs font-bold tracking-widest uppercase text-balda-gold mb-2">
-                            PT. Balda Citra Mandiri
-                        </p>
-                        <h1 className="text-3xl md:text-5xl font-serif font-bold mb-3">Paket Ibadah Umrah</h1>
-                        <p className="text-balda-blue-sky max-w-lg">
-                            Rangkaian program Umrah yang dirancang dengan teliti untuk kekhusyukan dan kenyamanan
-                            ibadah Anda
+            <section className="page-hero">
+                <img
+                    src="/images/IMG-20260530-WA0216-scaled.jpg"
+                    alt="Jamaah Balda mengikuti pembekalan perjalanan Umrah"
+                    className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+                    width="2560"
+                    height="1920"
+                    fetchPriority="high"
+                />
+                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                    <div>
+                        <h1 className="page-hero-title">Paket Umrah</h1>
+                        <p className="page-hero-copy">
+                            Jadwal keberangkatan, pilihan maskapai, akomodasi,
+                            dan biaya paket dalam satu informasi yang mudah
+                            dibandingkan.
                         </p>
                     </div>
                 </div>
+            </section>
 
-                {/* Breadcrumb */}
-                <div className="bg-stone-50 border-b border-stone-100">
-                    <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-2 text-sm text-stone-500">
-                        <Link href="/" className="hover:text-balda-blue transition-colors">
+            <nav
+                aria-label="Breadcrumb"
+                className="border-b border-slate-200 bg-white"
+            >
+                <ol className="site-container flex items-center gap-2">
+                    <li>
+                        <Link href="/" className="breadcrumb-link">
                             Beranda
                         </Link>
-                        <ChevronRight size={14} />
-                        <span className="text-stone-800 font-medium">Paket Umrah</span>
-                    </div>
-                </div>
+                    </li>
+                    <li aria-hidden="true">
+                        <ChevronRight size={15} className="text-slate-400" />
+                    </li>
+                    <li
+                        className="text-sm font-bold text-slate-900"
+                        aria-current="page"
+                    >
+                        Paket Umrah
+                    </li>
+                </ol>
+            </nav>
 
-                {/* Paket list */}
-                <section className="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {paketList.map((p, i) => (
-                            <div
-                                key={i}
-                                className="card hover:border-balda-blue/30 transition-all"
-                                data-aos="fade-up"
-                                data-aos-delay={i * 100}
+            <section className="bg-slate-50 py-14 sm:py-20">
+                <div className="site-container">
+                    <div className="mb-10 grid gap-5 lg:grid-cols-[1fr_0.65fr] lg:items-end">
+                        <h2 className="section-title">
+                            Pilih jadwal yang sesuai dengan rencana Anda
+                        </h2>
+                        <p className="max-w-xl text-base leading-7 text-slate-600 lg:justify-self-end">
+                            Ketersediaan kursi dan tipe kamar dapat berubah. Tim
+                            Balda akan mengonfirmasi rincian terbaru saat
+                            konsultasi.
+                        </p>
+                    </div>
+
+                    <div className="space-y-7">
+                        {paketList.map((paket) => (
+                            <article
+                                key={paket.title + paket.tanggal}
+                                className="card grid md:grid-cols-[minmax(18rem,0.72fr)_1fr] lg:grid-cols-[22rem_1fr]"
                             >
-                                <div className="relative h-60 overflow-hidden">
+                                <div className="bg-balda-blue-light">
                                     <img
-                                        src={p.img}
-                                        alt={p.title}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                        src={paket.img}
+                                        alt={`Poster ${paket.title}, keberangkatan ${paket.tanggal}`}
+                                        className="h-full max-h-[38rem] w-full object-contain"
+                                        loading="lazy"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-balda-blue-deep/80 via-transparent to-transparent" />
-                                    <span
-                                        className={`absolute top-3 right-3 text-xs font-bold px-3 py-1 rounded-full shadow ${
-                                            p.badge === 'Tersedia' || p.badge === 'Pendaftaran Dibuka'
-                                                ? 'bg-balda-gold text-balda-blue-deep'
-                                                : 'bg-stone-400 text-white'
-                                        }`}
-                                    >
-                                        {p.badge}
-                                    </span>
-                                    <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                                        <h2 className="text-xl font-bold">{p.title}</h2>
-                                        <div className="flex gap-4 text-sm text-balda-gold mt-1 font-medium">
-                                            <span className="flex items-center gap-1">
-                                                <CalendarDays size={14} />
-                                                {p.tanggal}
-                                            </span>
-                                            <span className="flex items-center gap-1">
-                                                <Clock size={14} />
-                                                {p.hari} Hari
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="text-xs font-bold tracking-widest uppercase text-stone-400 mb-3">
-                                        Fasilitas Termasuk
-                                    </h3>
-                                    <ul className="space-y-2.5">
-                                        {p.highlights.map((h, j) => (
-                                            <li key={j} className="flex items-center gap-2.5 text-sm text-stone-700">
-                                                <Star size={14} className="text-balda-gold shrink-0 fill-balda-gold" />
-                                                {h}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <div className="mt-6 pt-5 border-t border-stone-100 flex items-center justify-between">
+                                <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+                                    <div>
+                                        <p
+                                            className={`mb-3 text-sm font-bold ${paket.status === 'Tentatif' ? 'text-amber-700' : 'text-balda-blue'}`}
+                                        >
+                                            {paket.status}
+                                        </p>
+                                        <h2 className="text-3xl font-black tracking-[-0.035em] text-balda-blue-deep">
+                                            {paket.title}
+                                        </h2>
+                                        <div className="mt-5 grid gap-4 border-y border-slate-200 py-5 sm:grid-cols-2">
+                                            <div className="flex items-start gap-3">
+                                                <CalendarDays
+                                                    size={19}
+                                                    className="mt-0.5 shrink-0 text-balda-blue"
+                                                    aria-hidden="true"
+                                                />
+                                                <div>
+                                                    <p className="text-xs font-semibold text-slate-500">
+                                                        Keberangkatan
+                                                    </p>
+                                                    <p className="mt-1 font-bold text-slate-900">
+                                                        {paket.tanggal}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                <Plane
+                                                    size={19}
+                                                    className="mt-0.5 shrink-0 text-balda-blue"
+                                                    aria-hidden="true"
+                                                />
+                                                <div>
+                                                    <p className="text-xs font-semibold text-slate-500">
+                                                        Maskapai
+                                                    </p>
+                                                    <p className="mt-1 font-bold text-slate-900">
+                                                        {paket.maskapai}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h3 className="mt-6 text-base font-extrabold text-slate-950">
+                                            Rincian utama
+                                        </h3>
+                                        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                                            {paket.highlights.map((item) => (
+                                                <li
+                                                    key={item}
+                                                    className="flex items-start gap-2.5 text-sm leading-6 text-slate-700"
+                                                >
+                                                    <Check
+                                                        size={17}
+                                                        strokeWidth={2.5}
+                                                        className="mt-0.5 shrink-0 text-balda-blue"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="mt-8 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
-                                            <div className="text-xs text-stone-400">Biaya Paket</div>
-                                            <div className="font-bold text-balda-blue text-base">Hubungi Kami</div>
+                                            <p className="text-xs font-semibold text-slate-500">
+                                                Biaya per jamaah
+                                            </p>
+                                            <p className="mt-1 text-xl font-black text-balda-blue-deep">
+                                                {paket.harga}
+                                            </p>
                                         </div>
-                                        {p.badge !== 'Selesai' ? (
-                                            <Link href="/kontak" className="btn-primary text-xs py-2.5 px-5">
-                                                Daftar Sekarang
-                                            </Link>
-                                        ) : (
-                                            <span className="text-sm text-stone-400 font-medium">
-                                                Periode Berakhir
-                                            </span>
-                                        )}
+                                        <Link
+                                            href={paket.href}
+                                            className="btn-primary sm:min-w-48"
+                                        >
+                                            Konsultasikan Paket
+                                        </Link>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
-                </section>
+                </div>
+            </section>
 
-                {/* CTA */}
-                <section className="py-14 bg-balda-blue text-white text-center">
-                    <div className="max-w-2xl mx-auto px-4" data-aos="zoom-in">
-                        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">
-                            Konsultasi Paket Bersama Tim Balda
+            <section className="bg-balda-blue-deep py-14 text-white">
+                <div className="site-container flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <h2 className="text-3xl font-black tracking-[-0.03em] text-white">
+                            Perlu membandingkan pilihan paket?
                         </h2>
-                        <p className="text-balda-blue-sky mb-6">
-                            Hubungi kami untuk informasi detail jadwal, maskapai, dan pilihan hotel.
+                        <p className="mt-3 text-balda-blue-sky">
+                            Sampaikan kebutuhan tanggal, jumlah jamaah, dan
+                            pilihan kamar kepada tim Balda.
                         </p>
-                        <a
-                            href="tel:02172791208"
-                            className="inline-flex items-center gap-2 bg-balda-gold text-balda-blue-deep font-bold px-7 py-3 rounded-full hover:bg-balda-gold-dark transition-colors shadow-lg"
-                        >
-                            <Phone size={17} /> Hubungi 021-7279 1208
-                        </a>
                     </div>
-                </section>
-            </div>
+                    <a
+                        href="tel:02172791208"
+                        className="btn-gold self-start lg:self-auto"
+                    >
+                        <Phone size={18} aria-hidden="true" /> Hubungi 021-7279
+                        1208
+                    </a>
+                </div>
+            </section>
         </PublicLayout>
     );
 }

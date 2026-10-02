@@ -1,27 +1,47 @@
-import { useState, FormEvent } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { ChevronRight, Clock, Mail, MapPin, Phone, Send, Check } from 'lucide-react';
+import { FormEvent, useMemo, useState } from 'react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import {
+    Check,
+    ChevronRight,
+    Clock,
+    LoaderCircle,
+    Mail,
+    MapPin,
+    Phone,
+    Send,
+} from 'lucide-react';
 import PublicLayout from '@/layouts/public-layout';
 
+const pilihanPaket = [
+    'Umrah Reguler 24 Oktober 2026',
+    'Umrah 12 Hari November 2026',
+    'Umrah Reguler 24 Desember 2026',
+    'Haji Khusus',
+    'Lainnya / Belum tahu',
+];
+
 export default function Kontak() {
+    const { url } = usePage();
+    const paketAwal = useMemo(() => {
+        const query = url.split('?')[1] ?? '';
+        return new URLSearchParams(query).get('paket') ?? '';
+    }, [url]);
     const [submitted, setSubmitted] = useState(false);
     const { data, setData, post, processing, reset, errors } = useForm({
         nama: '',
         telepon: '',
         email: '',
-        paket: '',
+        paket: paketAwal,
         pesan: '',
     });
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+        setSubmitted(false);
+
         post('/kontak', {
             preserveScroll: true,
             onSuccess: () => {
-                const waText = encodeURIComponent(
-                    `Halo Balda, nama saya ${data.nama}. Saya tertarik dengan ${data.paket || 'paket ibadah'}.\n\nPesan: ${data.pesan}\nNo HP: ${data.telepon}\nEmail: ${data.email}`
-                );
-                window.open(`https://wa.me/6202172791208?text=${waText}`, '_blank');
                 setSubmitted(true);
                 reset();
             },
@@ -31,251 +51,355 @@ export default function Kontak() {
     return (
         <PublicLayout>
             <Head>
-                <title>Kontak – Balda Haji & Umrah</title>
+                <title>Kontak dan Konsultasi | Balda Haji dan Umrah</title>
                 <meta
                     name="description"
-                    content="Hubungi PT. Balda Citra Mandiri untuk informasi paket Haji Khusus dan Umrah."
+                    content="Hubungi PT. Balda Citra Mandiri untuk konsultasi paket Haji Khusus dan Umrah."
                 />
             </Head>
 
-            <div className="pt-16">
-                {/* Hero */}
-                <div className="relative h-56 overflow-hidden">
-                    <img
-                        src="/images/20260611_home_web_3.jpg"
-                        alt="Kontak"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-green-950/80" />
-                    <div
-                        className="relative h-full flex flex-col items-center justify-center text-white text-center px-4"
-                        data-aos="fade-up"
-                    >
-                        <p className="section-tag text-amber-400 mb-2">Kami Siap Membantu</p>
-                        <h1 className="text-3xl md:text-4xl font-serif font-bold">Hubungi Kami</h1>
+            <section className="page-hero">
+                <img
+                    src="/images/20260611_home_web_3.jpg"
+                    alt="Jamaah Balda dalam perjalanan ibadah"
+                    className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+                    width="1923"
+                    height="554"
+                    fetchPriority="high"
+                />
+                <div className="site-container flex min-h-[22rem] items-end py-12 sm:items-center sm:py-16">
+                    <div>
+                        <h1 className="page-hero-title">
+                            Kontak dan Konsultasi
+                        </h1>
+                        <p className="page-hero-copy">
+                            Tanyakan jadwal, ketersediaan, fasilitas, dan proses
+                            pendaftaran langsung kepada tim Balda.
+                        </p>
                     </div>
                 </div>
+            </section>
 
-                {/* Breadcrumb */}
-                <div className="bg-stone-50 border-b border-stone-100">
-                    <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-2 text-sm text-stone-500">
-                        <Link href="/" className="hover:text-green-800 transition-colors">
+            <nav
+                aria-label="Breadcrumb"
+                className="border-b border-slate-200 bg-white"
+            >
+                <ol className="site-container flex items-center gap-2">
+                    <li>
+                        <Link href="/" className="breadcrumb-link">
                             Beranda
                         </Link>
-                        <ChevronRight size={14} />
-                        <span className="text-stone-800 font-medium">Kontak</span>
-                    </div>
-                </div>
+                    </li>
+                    <li aria-hidden="true">
+                        <ChevronRight size={15} className="text-slate-400" />
+                    </li>
+                    <li
+                        className="text-sm font-bold text-slate-900"
+                        aria-current="page"
+                    >
+                        Kontak
+                    </li>
+                </ol>
+            </nav>
 
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        {/* Info kontak */}
-                        <div data-aos="fade-right">
-                            <p className="section-tag mb-2">Informasi Kontak</p>
-                            <h2 className="section-title mb-6">Untuk Informasi & Pendaftaran</h2>
-                            <p className="text-stone-600 mb-8 leading-relaxed">
-                                Tim kami siap membantu Anda menemukan paket yang paling sesuai dengan kebutuhan dan
-                                kemampuan Anda. Jangan ragu untuk menghubungi kami.
-                            </p>
-
-                            <div className="space-y-5">
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-                                        <MapPin size={18} className="text-green-700" />
-                                    </div>
-                                    <div>
-                                        <div className="font-semibold text-stone-800 mb-0.5">Alamat Kantor</div>
-                                        <div className="text-stone-600 text-sm leading-relaxed">
-                                            Jl. Cipaku II No.25, RT.11/RW.4, Petogogan,
-                                            <br />
-                                            Kec. Kebayoran Baru, Jakarta Selatan 12170
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-                                        <Phone size={18} className="text-green-700" />
-                                    </div>
-                                    <div>
-                                        <div className="font-semibold text-stone-800 mb-0.5">Telepon</div>
-                                        <a
-                                            href="tel:02172791208"
-                                            className="text-green-700 hover:text-amber-700 font-medium block transition-colors"
-                                        >
-                                            021-7279 1208
-                                        </a>
-                                        <a
-                                            href="tel:02172791209"
-                                            className="text-green-700 hover:text-amber-700 font-medium transition-colors"
-                                        >
-                                            021-7279 1209
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-                                        <Mail size={18} className="text-green-700" />
-                                    </div>
-                                    <div>
-                                        <div className="font-semibold text-stone-800 mb-0.5">Email</div>
-                                        <a
-                                            href="mailto:info@baldacitra.com"
-                                            className="text-green-700 hover:text-amber-700 font-medium transition-colors"
-                                        >
-                                            info@baldacitra.com
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-                                        <Clock size={18} className="text-green-700" />
-                                    </div>
-                                    <div>
-                                        <div className="font-semibold text-stone-800 mb-0.5">Jam Operasional</div>
-                                        <div className="text-stone-600 text-sm">Senin – Jumat: 08.00 – 17.00 WIB</div>
-                                        <div className="text-stone-600 text-sm">Sabtu: 08.00 – 13.00 WIB</div>
-                                    </div>
+            <section className="bg-slate-50 py-14 sm:py-20">
+                <div className="site-container grid gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:gap-14">
+                    <div>
+                        <h2 className="text-3xl font-black tracking-[-0.03em] text-balda-blue-deep">
+                            Hubungi Balda
+                        </h2>
+                        <address className="mt-7 space-y-6 not-italic">
+                            <div className="flex items-start gap-4">
+                                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-balda-blue-light text-balda-blue">
+                                    <MapPin size={20} aria-hidden="true" />
+                                </span>
+                                <div>
+                                    <h3 className="font-extrabold text-slate-950">
+                                        Kantor
+                                    </h3>
+                                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                                        Jl. Cipaku II No.25, RT.11/RW.4,
+                                        Petogogan, Kebayoran Baru, Jakarta
+                                        Selatan 12170
+                                    </p>
                                 </div>
                             </div>
+                            <div className="flex items-start gap-4">
+                                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-balda-blue-light text-balda-blue">
+                                    <Phone size={20} aria-hidden="true" />
+                                </span>
+                                <div>
+                                    <h3 className="font-extrabold text-slate-950">
+                                        Telepon dan WhatsApp
+                                    </h3>
+                                    <a
+                                        href="tel:02172791208"
+                                        className="mt-1 block min-h-8 text-sm font-bold text-balda-blue hover:underline"
+                                    >
+                                        021-7279 1208 / 1209
+                                    </a>
+                                    <a
+                                        href="https://wa.me/6281288888996?text=Assalamualaikum%2C%20saya%20ingin%20berkonsultasi%20tentang%20program%20Balda."
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block min-h-8 text-sm font-bold text-balda-blue hover:underline"
+                                    >
+                                        08128 8888 996
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-balda-blue-light text-balda-blue">
+                                    <Mail size={20} aria-hidden="true" />
+                                </span>
+                                <div>
+                                    <h3 className="font-extrabold text-slate-950">
+                                        Email
+                                    </h3>
+                                    <a
+                                        href="mailto:info@baldacitra.com"
+                                        className="mt-1 inline-flex min-h-8 items-center text-sm font-bold text-balda-blue hover:underline"
+                                    >
+                                        info@baldacitra.com
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-balda-blue-light text-balda-blue">
+                                    <Clock size={20} aria-hidden="true" />
+                                </span>
+                                <div>
+                                    <h3 className="font-extrabold text-slate-950">
+                                        Jam operasional
+                                    </h3>
+                                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                                        Senin-Jumat, 08.00-17.00 WIB
+                                    </p>
+                                    <p className="text-sm leading-6 text-slate-600">
+                                        Sabtu, 08.00-13.00 WIB
+                                    </p>
+                                </div>
+                            </div>
+                        </address>
 
-                            {/* WA Button */}
+                        <div className="mt-8 grid gap-3">
                             <a
-                                href="https://wa.me/6202172791208?text=Assalamualaikum,%20saya%20ingin%20menanyakan%20informasi%20paket%20Haji/Umrah%20dari%20Balda."
+                                href="https://wa.me/6281288888996?text=Assalamualaikum%2C%20saya%20ingin%20berkonsultasi%20tentang%20program%20Balda."
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-8 flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-4 rounded-2xl transition-colors w-full shadow-md"
+                                className="btn-primary w-full"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-5 h-5"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                >
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                </svg>
-                                Chat via WhatsApp
+                                Konsultasi via WhatsApp
+                            </a>
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=Jl.%20Cipaku%20II%20No.25%2C%20Petogogan%2C%20Jakarta%20Selatan"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex min-h-11 items-center justify-center rounded-[10px] border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-balda-blue-deep transition-colors hover:border-balda-blue"
+                            >
+                                Buka Lokasi Kantor
                             </a>
                         </div>
+                    </div>
 
-                        {/* Form */}
-                        <div data-aos="fade-left">
-                            <div className="card p-7">
-                                <h3 className="text-xl font-serif font-bold text-stone-800 mb-6">Kirim Pesan</h3>
+                    <div className="rounded-2xl bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.09)] sm:p-8 lg:p-10">
+                        <h2 className="text-3xl font-black tracking-[-0.03em] text-balda-blue-deep">
+                            Kirim pertanyaan
+                        </h2>
 
-                                {submitted && (
-                                    <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 flex items-center gap-3">
-                                        <Check size={20} className="text-green-600 shrink-0" />
-                                        <div className="text-sm">
-                                            Terima kasih! Pesan Anda telah diteruskan ke WhatsApp representatif Balda.
-                                        </div>
-                                    </div>
-                                )}
-
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
-                                                Nama Lengkap
-                                            </label>
-                                            <input
-                                                type="text"
-                                                placeholder="Nama Anda"
-                                                required
-                                                value={data.nama}
-                                                onChange={(e) => setData('nama', e.target.value)}
-                                                className="w-full px-4 py-2.5 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                                            />
-                                            {errors.nama && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.nama}</p>
-                                            )}
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
-                                                No. Telepon
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                placeholder="08xx xxxx xxxx"
-                                                required
-                                                value={data.telepon}
-                                                onChange={(e) => setData('telepon', e.target.value)}
-                                                className="w-full px-4 py-2.5 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                                            />
-                                            {errors.telepon && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.telepon}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            placeholder="email@anda.com"
-                                            value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            className="w-full px-4 py-2.5 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                                        />
-                                        {errors.email && (
-                                            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
-                                            Paket yang Diminati
-                                        </label>
-                                        <select
-                                            value={data.paket}
-                                            onChange={(e) => setData('paket', e.target.value)}
-                                            className="w-full px-4 py-2.5 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white transition-all"
-                                        >
-                                            <option value="">Pilih Paket</option>
-                                            <option>Umrah Plus - Agustus 2026</option>
-                                            <option>Umrah Plus - Februari 2026</option>
-                                            <option>Haji Khusus 2026</option>
-                                            <option>Lainnya / Belum Tahu</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
-                                            Pesan
-                                        </label>
-                                        <textarea
-                                            rows={4}
-                                            placeholder="Tuliskan pertanyaan atau kebutuhan Anda..."
-                                            value={data.pesan}
-                                            onChange={(e) => setData('pesan', e.target.value)}
-                                            className="w-full px-4 py-2.5 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none transition-all"
-                                        />
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        disabled={processing}
-                                        className="w-full btn-gold justify-center py-3 cursor-pointer disabled:opacity-50"
-                                    >
-                                        <Send size={16} /> {processing ? 'Mengirim...' : 'Kirim Pesan'}
-                                    </button>
-                                </form>
+                        {submitted && (
+                            <div
+                                className="mt-6 flex items-start gap-3 rounded-xl border border-blue-200 bg-balda-blue-light p-4 text-balda-blue-deep"
+                                role="status"
+                            >
+                                <Check
+                                    size={20}
+                                    className="mt-0.5 shrink-0"
+                                    aria-hidden="true"
+                                />
+                                <p className="text-sm font-semibold">
+                                    Pesan berhasil dikirim. Tim Balda akan
+                                    menghubungi Anda melalui nomor yang
+                                    terdaftar.
+                                </p>
                             </div>
+                        )}
 
-                            {/* Maps placeholder */}
-                            <div className="mt-4 rounded-2xl overflow-hidden h-48 bg-stone-100 flex items-center justify-center border border-stone-200 shadow-sm">
-                                <div className="text-center text-stone-400">
-                                    <MapPin size={32} className="mx-auto mb-2 text-stone-300" />
-                                    <div className="text-sm font-medium text-stone-600">
-                                        Jl. Cipaku II No.25, Kebayoran Baru
-                                    </div>
-                                    <div className="text-xs text-stone-400">Jakarta Selatan 12170</div>
+                        <form
+                            onSubmit={handleSubmit}
+                            className="mt-7 space-y-5"
+                        >
+                            <div className="grid gap-5 sm:grid-cols-2">
+                                <div>
+                                    <label
+                                        htmlFor="nama"
+                                        className="mb-2 block text-sm font-bold text-slate-800"
+                                    >
+                                        Nama lengkap
+                                    </label>
+                                    <input
+                                        id="nama"
+                                        type="text"
+                                        autoComplete="name"
+                                        required
+                                        value={data.nama}
+                                        onChange={(event) =>
+                                            setData('nama', event.target.value)
+                                        }
+                                        className="form-control"
+                                        aria-invalid={Boolean(errors.nama)}
+                                        aria-describedby={
+                                            errors.nama
+                                                ? 'nama-error'
+                                                : undefined
+                                        }
+                                    />
+                                    {errors.nama && (
+                                        <p
+                                            id="nama-error"
+                                            className="mt-2 text-sm font-semibold text-red-700"
+                                        >
+                                            {errors.nama}
+                                        </p>
+                                    )}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="telepon"
+                                        className="mb-2 block text-sm font-bold text-slate-800"
+                                    >
+                                        Nomor telepon
+                                    </label>
+                                    <input
+                                        id="telepon"
+                                        type="tel"
+                                        inputMode="tel"
+                                        autoComplete="tel"
+                                        placeholder="08xx xxxx xxxx"
+                                        required
+                                        value={data.telepon}
+                                        onChange={(event) =>
+                                            setData(
+                                                'telepon',
+                                                event.target.value,
+                                            )
+                                        }
+                                        className="form-control"
+                                        aria-invalid={Boolean(errors.telepon)}
+                                        aria-describedby={
+                                            errors.telepon
+                                                ? 'telepon-error'
+                                                : undefined
+                                        }
+                                    />
+                                    {errors.telepon && (
+                                        <p
+                                            id="telepon-error"
+                                            className="mt-2 text-sm font-semibold text-red-700"
+                                        >
+                                            {errors.telepon}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
-                        </div>
+
+                            <div>
+                                <label
+                                    htmlFor="email"
+                                    className="mb-2 block text-sm font-bold text-slate-800"
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="nama@email.com"
+                                    value={data.email}
+                                    onChange={(event) =>
+                                        setData('email', event.target.value)
+                                    }
+                                    className="form-control"
+                                    aria-invalid={Boolean(errors.email)}
+                                    aria-describedby={
+                                        errors.email ? 'email-error' : undefined
+                                    }
+                                />
+                                {errors.email && (
+                                    <p
+                                        id="email-error"
+                                        className="mt-2 text-sm font-semibold text-red-700"
+                                    >
+                                        {errors.email}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <label
+                                    htmlFor="paket"
+                                    className="mb-2 block text-sm font-bold text-slate-800"
+                                >
+                                    Program yang diminati
+                                </label>
+                                <select
+                                    id="paket"
+                                    value={data.paket}
+                                    onChange={(event) =>
+                                        setData('paket', event.target.value)
+                                    }
+                                    className="form-control"
+                                >
+                                    <option value="">Pilih program</option>
+                                    {pilihanPaket.map((paket) => (
+                                        <option key={paket} value={paket}>
+                                            {paket}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label
+                                    htmlFor="pesan"
+                                    className="mb-2 block text-sm font-bold text-slate-800"
+                                >
+                                    Pesan
+                                </label>
+                                <textarea
+                                    id="pesan"
+                                    rows={5}
+                                    placeholder="Tuliskan hal yang ingin Anda tanyakan"
+                                    value={data.pesan}
+                                    onChange={(event) =>
+                                        setData('pesan', event.target.value)
+                                    }
+                                    className="form-control resize-y"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60"
+                            >
+                                {processing ? (
+                                    <LoaderCircle
+                                        size={18}
+                                        className="animate-spin"
+                                        aria-hidden="true"
+                                    />
+                                ) : (
+                                    <Send size={18} aria-hidden="true" />
+                                )}
+                                {processing
+                                    ? 'Mengirim pesan...'
+                                    : 'Kirim Pesan'}
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
+            </section>
         </PublicLayout>
     );
 }

@@ -1,57 +1,53 @@
 import { Link } from '@inertiajs/react';
-import { Phone, Mail, MapPin, Instagram, Youtube, Facebook } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Facebook } from 'lucide-react';
 
 export default function Footer() {
     return (
         <footer className="bg-balda-blue-deep text-white">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-                    <div className="md:col-span-2">
-                        <div className="bg-white rounded-xl p-3 inline-block mb-5">
+            <div className="site-container py-14 sm:py-16">
+                <div className="grid gap-10 lg:grid-cols-[1.15fr_0.65fr_1.2fr] lg:gap-14">
+                    <div>
+                        <div className="mb-5 inline-block rounded-xl bg-white p-3">
                             <img
                                 src="/images/balda_logo.png"
                                 alt="Logo Balda Hajj & Umrah"
                                 className="h-10 w-auto object-contain"
+                                width="116"
+                                height="80"
                             />
                         </div>
-                        <p className="text-balda-blue-sky text-sm leading-relaxed max-w-sm">
-                            Penyelenggara perjalanan ibadah Haji Khusus dan Umrah terpercaya sejak 1996.
-                            Berizin resmi Kemenag RI dan anggota HIMPUH.
+                        <p className="max-w-md text-sm leading-6 text-balda-blue-sky">
+                            Penyelenggara perjalanan ibadah Haji Khusus dan
+                            Umrah terpercaya sejak 1996. Berizin resmi Kemenag
+                            RI dan anggota HIMPUH.
                         </p>
-                        <div className="flex gap-3 mt-6">
+                        <div className="mt-6 flex gap-3">
                             <a
                                 href="https://instagram.com/baldacitra"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full bg-balda-blue hover:bg-balda-gold hover:text-balda-blue-deep flex items-center justify-center transition-colors"
+                                className="flex size-11 items-center justify-center rounded-lg bg-white/10 text-white transition-colors hover:bg-balda-gold hover:text-balda-blue-deep"
                                 aria-label="Instagram Balda Citra"
                             >
-                                <Instagram size={17} />
-                            </a>
-                            <a
-                                href="https://youtube.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full bg-balda-blue hover:bg-balda-gold hover:text-balda-blue-deep flex items-center justify-center transition-colors"
-                                aria-label="YouTube Balda Citra"
-                            >
-                                <Youtube size={17} />
+                                <Instagram size={19} aria-hidden="true" />
                             </a>
                             <a
                                 href="https://facebook.com/baldacitra"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full bg-balda-blue hover:bg-balda-gold hover:text-balda-blue-deep flex items-center justify-center transition-colors"
+                                className="flex size-11 items-center justify-center rounded-lg bg-white/10 text-white transition-colors hover:bg-balda-gold hover:text-balda-blue-deep"
                                 aria-label="Facebook Balda Citra"
                             >
-                                <Facebook size={17} />
+                                <Facebook size={19} aria-hidden="true" />
                             </a>
                         </div>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold text-xs tracking-widest uppercase text-balda-gold mb-4">Navigasi</h3>
-                        <ul className="space-y-2.5 text-sm text-balda-blue-sky">
+                        <h2 className="mb-4 text-base font-extrabold text-white">
+                            Navigasi
+                        </h2>
+                        <ul className="space-y-1 text-sm text-balda-blue-sky">
                             {[
                                 ['Beranda', '/'],
                                 ['Paket Umrah', '/umrah'],
@@ -61,7 +57,10 @@ export default function Footer() {
                                 ['Kontak', '/kontak'],
                             ].map(([label, href]) => (
                                 <li key={href}>
-                                    <Link href={href} className="hover:text-balda-gold transition-colors">
+                                    <Link
+                                        href={href}
+                                        className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                    >
                                         {label}
                                     </Link>
                                 </li>
@@ -70,44 +69,69 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="font-semibold text-xs tracking-widest uppercase text-balda-gold mb-4">
-                            Kontak & Legalitas
-                        </h3>
-                        <ul className="space-y-3 text-sm text-balda-blue-sky">
+                        <h2 className="mb-4 text-base font-extrabold text-white">
+                            Kontak dan legalitas
+                        </h2>
+                        <ul className="space-y-4 text-sm text-balda-blue-sky">
                             <li className="flex gap-2.5">
-                                <MapPin size={16} className="mt-0.5 text-balda-gold shrink-0" />
-                                <span>Jl. Cipaku II No.25, Kebayoran Baru, Jakarta Selatan 12170</span>
+                                <MapPin
+                                    size={18}
+                                    className="mt-0.5 shrink-0 text-balda-gold"
+                                    aria-hidden="true"
+                                />
+                                <span>
+                                    Jl. Cipaku II No.25, Kebayoran Baru, Jakarta
+                                    Selatan 12170
+                                </span>
                             </li>
-                            <li className="flex gap-2.5 items-center">
-                                <Phone size={16} className="text-balda-gold shrink-0" />
-                                <a href="tel:02172791208" className="hover:text-balda-gold transition-colors">
+                            <li className="flex items-center gap-2.5">
+                                <Phone
+                                    size={18}
+                                    className="shrink-0 text-balda-gold"
+                                    aria-hidden="true"
+                                />
+                                <a
+                                    href="tel:02172791208"
+                                    className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                >
                                     021-7279 1208 / 1209
                                 </a>
                             </li>
-                            <li className="flex gap-2.5 items-center">
-                                <Mail size={16} className="text-balda-gold shrink-0" />
-                                <a href="mailto:info@baldacitra.com" className="hover:text-balda-gold transition-colors">
+                            <li className="flex items-center gap-2.5">
+                                <Mail
+                                    size={18}
+                                    className="shrink-0 text-balda-gold"
+                                    aria-hidden="true"
+                                />
+                                <a
+                                    href="mailto:info@baldacitra.com"
+                                    className="inline-flex min-h-10 items-center transition-colors hover:text-balda-gold"
+                                >
                                     info@baldacitra.com
                                 </a>
                             </li>
                         </ul>
 
-                        <div className="mt-6 pt-4 border-t border-balda-blue/40 text-xs text-balda-blue-sky/80 space-y-1">
+                        <div className="mt-5 space-y-1 border-t border-white/15 pt-5 text-xs text-balda-blue-sky">
                             <div>
-                                <strong className="text-white">PIHK:</strong> 1214 Tahun 2021
+                                <strong className="text-white">PIHK:</strong>{' '}
+                                1214 Tahun 2021
                             </div>
                             <div>
-                                <strong className="text-white">PPIU:</strong> U.8 Tahun 2022
+                                <strong className="text-white">PPIU:</strong>{' '}
+                                U.8 Tahun 2022
                             </div>
                             <div>
-                                <strong className="text-white">HIMPUH:</strong> 039/HIMPUH/2010
+                                <strong className="text-white">HIMPUH:</strong>{' '}
+                                039/HIMPUH/2010
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="border-t border-balda-blue/30 py-4 text-center text-xs text-balda-blue-sky/60">
-                © {new Date().getFullYear()} PT. Balda Citra Mandiri. Hajj & Umrah Indonesia.
+            <div className="border-t border-white/10 py-5 text-center text-xs text-balda-blue-sky">
+                © {new Date().getFullYear()} PT. Balda Citra Mandiri. Haji dan
+                Umrah Indonesia.
             </div>
         </footer>
     );

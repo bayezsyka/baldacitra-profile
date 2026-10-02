@@ -1,6 +1,4 @@
-import { useEffect, ReactNode } from 'react';
-import { router } from '@inertiajs/react';
-import AOS from 'aos';
+import { ReactNode } from 'react';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 
@@ -9,27 +7,15 @@ interface PublicLayoutProps {
 }
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
-    useEffect(() => {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 40,
-            easing: 'ease-out-cubic',
-        });
-
-        const unregisterRouterListener = router.on('navigate', () => {
-            AOS.refresh();
-        });
-
-        return () => {
-            unregisterRouterListener();
-        };
-    }, []);
-
     return (
-        <div className="min-h-screen flex flex-col bg-white text-stone-800 font-sans antialiased selection:bg-balda-gold selection:text-balda-blue-deep">
+        <div className="flex min-h-screen flex-col bg-white font-sans text-slate-800">
+            <a href="#konten-utama" className="skip-link">
+                Lewati ke konten
+            </a>
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main id="konten-utama" className="flex-1">
+                {children}
+            </main>
             <Footer />
         </div>
     );

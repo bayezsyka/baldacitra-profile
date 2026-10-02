@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Menu, X, Phone } from 'lucide-react';
 
@@ -8,37 +8,63 @@ const links = [
     { href: '/haji', label: 'Haji Khusus' },
     { href: '/galeri', label: 'Galeri' },
     { href: '/profil', label: 'Profil' },
-    { href: '/kontak', label: 'Kontak' },
 ];
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
     const { url } = usePage();
 
+    useEffect(() => {
+        setOpen(false);
+    }, [url]);
+
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const closeOnEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('keydown', closeOnEscape);
+
+        return () => document.removeEventListener('keydown', closeOnEscape);
+    }, [open]);
+
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-100 shadow-sm">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
-                    <Link href="/" className="flex items-center gap-3">
+        <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+            <nav className="site-container" aria-label="Navigasi utama">
+                <div className="flex h-[76px] items-center justify-between gap-4">
+                    <Link
+                        href="/"
+                        className="flex min-h-11 items-center"
+                        aria-label="Balda Haji dan Umrah, beranda"
+                    >
                         <img
                             src="/images/balda_logo.png"
                             alt="Logo Balda Hajj & Umrah"
                             className="h-12 w-auto object-contain"
+                            width="116"
+                            height="80"
                         />
                     </Link>
 
-                    <div className="hidden md:flex items-center gap-1">
+                    <div className="hidden items-center gap-1 lg:flex">
                         {links.map((l) => {
                             const isActive = url === l.href;
                             return (
                                 <Link
                                     key={l.href}
                                     href={l.href}
-                                    className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-colors ${
+                                    className={`inline-flex min-h-11 items-center border-b-2 px-3 text-sm font-semibold transition-colors ${
                                         isActive
-                                            ? 'text-balda-blue bg-balda-blue-light font-semibold'
-                                            : 'text-stone-600 hover:text-balda-blue hover:bg-balda-blue-light/50'
+                                            ? 'border-balda-gold text-balda-blue-deep'
+                                            : 'border-transparent text-slate-600 hover:text-balda-blue'
                                     }`}
+                                    aria-current={isActive ? 'page' : undefined}
                                 >
                                     {l.label}
                                 </Link>
@@ -46,64 +72,82 @@ export default function Navbar() {
                         })}
                     </div>
 
-                    <div className="hidden md:flex items-center gap-4">
+                    <div className="hidden items-center gap-3 lg:flex">
                         <a
                             href="tel:02172791208"
-                            className="flex items-center gap-1.5 text-sm font-medium text-stone-600 hover:text-balda-blue transition-colors"
+                            className="inline-flex min-h-11 items-center gap-2 px-2 text-sm font-semibold text-slate-600 transition-colors hover:text-balda-blue"
                         >
-                            <Phone size={15} className="text-balda-blue" /> 021-7279 1208
+                            <Phone size={17} aria-hidden="true" /> 021-7279 1208
                         </a>
-                        <Link href="/kontak" className="btn-gold text-xs py-2.5 px-5 uppercase tracking-wider">
-                            Daftar Sekarang
+                        <Link href="/kontak" className="btn-gold">
+                            Konsultasi Paket
                         </Link>
                     </div>
 
                     <button
+                        type="button"
                         onClick={() => setOpen(!open)}
-                        className="md:hidden p-2 rounded-lg hover:bg-stone-100 text-balda-blue transition-colors"
-                        aria-label="Toggle navigation menu"
+                        className="inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-bold text-balda-blue-deep transition-colors hover:bg-balda-blue-light lg:hidden"
+                        aria-label={open ? 'Tutup menu' : 'Buka menu'}
+                        aria-expanded={open}
+                        aria-controls="menu-mobile"
                     >
-                        {open ? <X size={24} /> : <Menu size={24} />}
+                        {open ? (
+                            <X size={21} aria-hidden="true" />
+                        ) : (
+                            <Menu size={21} aria-hidden="true" />
+                        )}
+                        <span>Menu</span>
                     </button>
                 </div>
-            </div>
 
-            {open && (
-                <div className="md:hidden bg-white border-t border-stone-100 px-4 py-4 space-y-2 shadow-lg">
-                    {links.map((l) => {
-                        const isActive = url === l.href;
-                        return (
+                {open && (
+                    <div
+                        id="menu-mobile"
+                        className="border-t border-slate-200 bg-white py-4 lg:hidden"
+                    >
+                        <div className="grid gap-1">
+                            {links.map((l) => {
+                                const isActive = url === l.href;
+                                return (
+                                    <Link
+                                        key={l.href}
+                                        href={l.href}
+                                        className={`flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold transition-colors ${
+                                            isActive
+                                                ? 'bg-balda-blue-light text-balda-blue-deep'
+                                                : 'text-slate-700 hover:bg-slate-50 hover:text-balda-blue'
+                                        }`}
+                                        aria-current={
+                                            isActive ? 'page' : undefined
+                                        }
+                                    >
+                                        {l.label}
+                                    </Link>
+                                );
+                            })}
                             <Link
-                                key={l.href}
-                                href={l.href}
-                                onClick={() => setOpen(false)}
-                                className={`block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                                    isActive
-                                        ? 'text-balda-blue bg-balda-blue-light font-semibold'
-                                        : 'text-stone-700 hover:text-balda-blue hover:bg-balda-blue-light/50'
-                                }`}
+                                href="/kontak"
+                                className="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-balda-blue"
                             >
-                                {l.label}
+                                Kontak
                             </Link>
-                        );
-                    })}
-                    <div className="pt-3 border-t border-stone-100 flex flex-col gap-2">
-                        <a
-                            href="tel:02172791208"
-                            className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-stone-600"
-                        >
-                            <Phone size={15} className="text-balda-blue" /> 021-7279 1208
-                        </a>
-                        <Link
-                            href="/kontak"
-                            onClick={() => setOpen(false)}
-                            className="block text-center btn-gold text-xs py-3 w-full uppercase tracking-wider"
-                        >
-                            Daftar Sekarang
-                        </Link>
+                        </div>
+                        <div className="mt-4 grid gap-2 border-t border-slate-200 pt-4 sm:grid-cols-2">
+                            <a
+                                href="tel:02172791208"
+                                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] border border-slate-300 px-4 text-sm font-bold text-balda-blue-deep"
+                            >
+                                <Phone size={17} aria-hidden="true" /> 021-7279
+                                1208
+                            </a>
+                            <Link href="/kontak" className="btn-gold w-full">
+                                Konsultasi Paket
+                            </Link>
+                        </div>
                     </div>
-                </div>
-            )}
-        </nav>
+                )}
+            </nav>
+        </header>
     );
 }
