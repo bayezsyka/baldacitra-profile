@@ -69,7 +69,7 @@ export default function Home() {
                 />
             </Head>
 
-            <section className="relative isolate flex min-h-[calc(100svh-4.25rem)] bg-balda-blue-deep text-white sm:min-h-[40rem]">
+            <section className="relative isolate flex min-h-[calc(100svh-7rem)] bg-balda-blue-deep text-white sm:min-h-[40rem]">
                 <img
                     src="/images/20260611_home_web_2.jpg"
                     alt="Jamaah Balda di Masjidil Haram"
